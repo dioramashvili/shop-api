@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 400px; margin: 80px auto; padding: 0 20px; }
+        h1 { font-size: 1.5rem; }
+        label { display: block; margin-top: 12px; }
+        input { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
+        button { margin-top: 16px; padding: 10px 20px; width: 100%; cursor: pointer; }
+        .hint { margin-top: 24px; font-size: 0.9rem; color: #555; }
+        .error { color: #c00; margin-top: 12px; }
+    </style>
+</head>
+<body>
+<h1>Shop Login</h1>
+<p id="logout-msg" class="error" style="display:none;">You have been logged out.</p>
+<form action="/login" method="post">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" required autofocus>
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" required>
+
+    <button type="submit">Log in</button>
+</form>
+<div class="hint">
+    <strong>Demo accounts</strong><br>
+    Admin: admin / admin123<br>
+    User: user / user123
+</div>
+<script>
+    if (window.location.search.includes('logout')) {
+        document.getElementById('logout-msg').style.display = 'block';
+    }
+</script>
+</body>
+</html>
