@@ -1,8 +1,8 @@
 package com.shop.exception;
 
-public class DuplicateResourceException extends RuntimeException {
+public class DuplicateResourceException extends LocalizedException {
 
-    public DuplicateResourceException(String message) {
-        super(message);
+    public DuplicateResourceException(String messageKey, Object... args) {
+        super(messageKey, args);
     }
 }

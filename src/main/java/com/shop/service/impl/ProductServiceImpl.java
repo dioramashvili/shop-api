@@ -9,6 +9,7 @@ import com.shop.repository.CategoryRepository;
 import com.shop.repository.ProductRepository;
 import com.shop.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -28,7 +30,7 @@ public class ProductServiceImpl implements ProductService {
     @PreAuthorize("isAuthenticated()")
     public ProductResponse createProduct(ProductRequest request) {
         Category category = categoryRepository.findById(request.getCategoryId())
-                .orElseThrow(() -> new ResourceNotFoundException("Category not found with ID: " + request.getCategoryId()));
+                .orElseThrow(() -> new ResourceNotFoundException("error.category.not.found", request.getCategoryId()));
 
         Product product = Product.builder()
                 .name(request.getName())
@@ -41,12 +43,14 @@ public class ProductServiceImpl implements ProductService {
         category.getProducts().add(product);
 
         Product saved = productRepository.save(product);
+        log.info("Created product '{}' with ID {}", saved.getName(), saved.getId());
         return mapToResponse(saved);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<ProductResponse> getAllProducts() {
+        log.debug("Fetching all products");
         return productRepository.findAll()
                 .stream()
                 .map(this::mapToResponse)
@@ -56,16 +60,18 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional(readOnly = true)
     public ProductResponse getProductById(Long id) {
+        log.debug("Fetching product with ID {}", id);
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found with ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("error.product.not.found", id));
         return mapToResponse(product);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<ProductResponse> getProductsByCategory(Long categoryId) {
+        log.debug("Fetching products for category ID {}", categoryId);
         if (!categoryRepository.existsById(categoryId)) {
-            throw new ResourceNotFoundException("Category not found with ID: " + categoryId);
+            throw new ResourceNotFoundException("error.category.not.found", categoryId);
         }
 
         return productRepository.findByCategoryId(categoryId)
@@ -78,10 +84,10 @@ public class ProductServiceImpl implements ProductService {
     @PreAuthorize("isAuthenticated()")
     public ProductResponse updateProduct(Long id, ProductRequest request) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found with ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("error.product.not.found", id));
 
         Category category = categoryRepository.findById(request.getCategoryId())
-                .orElseThrow(() -> new ResourceNotFoundException("Category not found with ID: " + request.getCategoryId()));
+                .orElseThrow(() -> new ResourceNotFoundException("error.category.not.found", request.getCategoryId()));
 
         if (!product.getCategory().getId().equals(category.getId())) {
             product.getCategory().getProducts().remove(product);
@@ -95,6 +101,7 @@ public class ProductServiceImpl implements ProductService {
         product.setCategory(category);
 
         Product updated = productRepository.save(product);
+        log.info("Updated product with ID {}", updated.getId());
         return mapToResponse(updated);
     }
 
@@ -102,9 +109,10 @@ public class ProductServiceImpl implements ProductService {
     @PreAuthorize("hasRole('ADMIN')")
     public void deleteProduct(Long id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found with ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("error.product.not.found", id));
         product.getCategory().getProducts().remove(product);
         productRepository.delete(product);
+        log.info("Deleted product with ID {}", id);
     }
 
     private ProductResponse mapToResponse(Product product) {

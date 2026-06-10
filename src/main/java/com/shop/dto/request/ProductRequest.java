@@ -15,8 +15,8 @@ import java.math.BigDecimal;
 @Builder
 public class ProductRequest {
 
-    @NotBlank(message = "Product name cannot be blank")
-    @Size(min = 2, max = 100, message = "Product name must be between 2 and 100 characters")
+    @NotBlank(message = "{validation.product.name.notblank}")
+    @Size(min = 2, max = 100, message = "{validation.product.name.size}")
     private String name;
 
     @Size(max = 500, message = "Description cannot exceed 500 characters")

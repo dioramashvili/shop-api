@@ -1,0 +1,79 @@
+2026-06-11 01:42:39.838 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+2026-06-11 01:42:39.989 [main] INFO  com.shop.SecurityIntegrationTest - Starting SecurityIntegrationTest using Java 21.0.6 with PID 6204 (started by User in C:\Users\User\IdeaProjects\shop)
+2026-06-11 01:42:39.998 [main] DEBUG com.shop.SecurityIntegrationTest - Running with Spring Boot v3.4.13, Spring v6.2.15
+2026-06-11 01:42:40.000 [main] INFO  com.shop.SecurityIntegrationTest - The following 1 profile is active: "dev"
+2026-06-11 01:42:42.735 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-11 01:42:42.918 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 146 ms. Found 3 JPA repository interfaces.
+2026-06-11 01:42:44.523 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-11 01:42:44.787 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.39.Final
+2026-06-11 01:42:45.006 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-11 01:42:46.534 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-11 01:42:46.623 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-11 01:42:47.030 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:shopdb user=SA
+2026-06-11 01:42:47.043 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-11 01:42:47.113 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-11 01:42:47.164 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-11 01:42:49.458 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-11 01:42:49.581 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11 01:42:50.756 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-11 01:42:52.692 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-11 01:42:52.757 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-06-11 01:42:54.690 [main] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:shopdb'
+2026-06-11 01:42:54.942 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-06-11 01:42:54.942 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2026-06-11 01:42:54.942 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2026-06-11 01:42:55.003 [main] INFO  com.shop.SecurityIntegrationTest - Started SecurityIntegrationTest in 16.43 seconds (process running for 19.326)
+2026-06-11 01:42:55.223 [main] INFO  com.shop.config.DevDataInitializer - Seeding development catalog data
+2026-06-11 01:42:55.358 [main] INFO  com.shop.config.DevDataInitializer - Development catalog seeded with 2 categories and 3 products
+2026-06-11 01:42:55.367 [main] INFO  com.shop.config.DataInitializer - Seeding default users
+2026-06-11 01:42:55.629 [main] INFO  com.shop.config.DataInitializer - Seeded 2 users
+2026-06-11 01:42:56.866 [main] INFO  com.shop.controller.AdminController - Admin dashboard accessed for application Shop API (Development)
+2026-06-11 01:42:57.102 [main] DEBUG c.s.service.impl.ProductServiceImpl - Fetching all products
+2026-06-11 01:42:57.267 [main] WARN  c.s.security.RestAccessDeniedHandler - Access denied for user on /api/admin/dashboard
+2026-06-11 01:42:57.301 [main] WARN  c.s.s.RestAuthenticationEntryPoint - Unauthenticated access attempt to /api/products
+2026-06-11 01:42:57.433 [main] WARN  c.s.security.RestAccessDeniedHandler - Access denied for user on /api/categories
+2026-06-11 01:42:57.592 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.shop.ShopApplicationTests]: ShopApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-06-11 01:42:57.592 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.shop.ShopApplication for test class com.shop.ShopApplicationTests
+2026-06-11 01:42:57.735 [main] INFO  com.shop.ShopApplicationTests - Starting ShopApplicationTests using Java 21.0.6 with PID 6204 (started by User in C:\Users\User\IdeaProjects\shop)
+2026-06-11 01:42:57.739 [main] DEBUG com.shop.ShopApplicationTests - Running with Spring Boot v3.4.13, Spring v6.2.15
+2026-06-11 01:42:57.739 [main] INFO  com.shop.ShopApplicationTests - The following 1 profile is active: "dev"
+2026-06-11 01:42:58.304 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-11 01:42:58.349 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 42 ms. Found 3 JPA repository interfaces.
+2026-06-11 01:42:58.602 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-11 01:42:58.608 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-11 01:42:58.637 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-11 01:42:58.641 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2026-06-11 01:42:58.641 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:shopdb user=SA
+2026-06-11 01:42:58.641 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2026-06-11 01:42:58.641 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-11 01:42:58.641 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-2)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-11 01:42:58.753 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-11 01:42:58.789 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11 01:42:59.293 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-11 01:42:59.320 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-06-11 01:42:59.753 [main] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:shopdb'
+2026-06-11 01:42:59.817 [main] INFO  com.shop.ShopApplicationTests - Started ShopApplicationTests in 2.213 seconds (process running for 24.139)
+2026-06-11 01:42:59.817 [main] INFO  com.shop.config.DataInitializer - Seeding default users
+2026-06-11 01:43:00.085 [main] INFO  com.shop.config.DataInitializer - Seeded 2 users
+2026-06-11 01:43:00.085 [main] INFO  com.shop.config.DevDataInitializer - Seeding development catalog data
+2026-06-11 01:43:00.112 [main] INFO  com.shop.config.DevDataInitializer - Development catalog seeded with 2 categories and 3 products
+2026-06-11 01:43:00.199 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11 01:43:00.215 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-11 01:43:00.219 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-11 01:43:00.227 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11 01:43:00.231 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2026-06-11 01:43:00.233 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.

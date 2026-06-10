@@ -46,9 +46,11 @@ class SecurityIntegrationTest {
 
     @Test
     void adminCanAccessDashboard() throws Exception {
-        mockMvc.perform(get("/api/admin/dashboard").with(httpBasic("admin", "admin123")))
+        mockMvc.perform(get("/api/admin/dashboard")
+                        .header("Accept-Language", "en")
+                        .with(httpBasic("admin", "admin123")))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message").value("Welcome, administrator!"));
+                .andExpect(jsonPath("$.message").value("Welcome, administrator! You are in the Shop API (Development) system."));
     }
 
     @Test

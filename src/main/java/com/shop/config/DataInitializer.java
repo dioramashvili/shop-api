@@ -4,12 +4,14 @@ import com.shop.entity.User;
 import com.shop.entity.UserRole;
 import com.shop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class DataInitializer implements CommandLineRunner {
@@ -20,8 +22,10 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) {
         if (userRepository.count() == 0) {
+            log.info("Seeding default users");
             seedUser("admin", "admin123", "admin@shop.com", Set.of(UserRole.ADMIN, UserRole.USER));
             seedUser("user", "user123", "user@shop.com", Set.of(UserRole.USER));
+            log.info("Seeded {} users", userRepository.count());
         }
     }
 

@@ -10,6 +10,7 @@ import com.shop.exception.ResourceNotFoundException;
 import com.shop.repository.CategoryRepository;
 import com.shop.service.CategoryService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -35,12 +37,14 @@ public class CategoryServiceImpl implements CategoryService {
                 .build();
 
         Category saved = categoryRepository.save(category);
+        log.info("Created category '{}' with ID {}", saved.getName(), saved.getId());
         return mapToResponse(saved);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<CategoryResponse> getAllCategories() {
+        log.debug("Fetching all categories");
         return categoryRepository.findAllWithProducts()
                 .stream()
                 .map(this::mapToResponse)
@@ -50,8 +54,9 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional(readOnly = true)
     public CategoryResponse getCategoryById(Long id) {
+        log.debug("Fetching category with ID {}", id);
         Category category = categoryRepository.findByIdWithProducts(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Category not found with ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("error.category.not.found", id));
         return mapToResponse(category);
     }
 
@@ -59,7 +64,7 @@ public class CategoryServiceImpl implements CategoryService {
     @PreAuthorize("hasRole('ADMIN')")
     public CategoryResponse updateCategory(Long id, CategoryRequest request) {
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Category not found with ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("error.category.not.found", id));
 
         validateUniqueName(request.getName(), id);
 
@@ -67,6 +72,7 @@ public class CategoryServiceImpl implements CategoryService {
         category.setDescription(request.getDescription());
 
         Category updated = categoryRepository.save(category);
+        log.info("Updated category with ID {}", updated.getId());
         return mapToResponse(categoryRepository.findByIdWithProducts(updated.getId()).orElse(updated));
     }
 
@@ -74,8 +80,9 @@ public class CategoryServiceImpl implements CategoryService {
     @PreAuthorize("hasRole('ADMIN')")
     public void deleteCategory(Long id) {
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Category not found with ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("error.category.not.found", id));
         categoryRepository.delete(category);
+        log.info("Deleted category with ID {}", id);
     }
 
     private void validateUniqueName(String name, Long excludeId) {
@@ -84,7 +91,8 @@ public class CategoryServiceImpl implements CategoryService {
                 : categoryRepository.existsByNameIgnoreCaseAndIdNot(name, excludeId);
 
         if (duplicate) {
-            throw new DuplicateResourceException("Category with name '" + name + "' already exists");
+            log.warn("Duplicate category name rejected: {}", name);
+            throw new DuplicateResourceException("error.category.duplicate", name);
         }
     }
 
